@@ -103,146 +103,189 @@ flex-grow: 0;
 <h2>Meta Tag Generator</h2>
 
 <div class="mtg-form-group">
-    <label for="mtg-websiteTitle" class="mtg-label">Website Title:</label>
-    <input type="text" id="mtg-websiteTitle" class="mtg-input">
+    <label for="mtg-websiteTitle" class="mtg-label">Website Title:</label>
+    <input type="text" id="mtg-websiteTitle" class="mtg-input">
 </div>
 
 <div class="mtg-form-group">
-    <label for="mtg-websiteDescription" class="mtg-label">Website Description:</label>
-    <textarea id="mtg-websiteDescription" class="mtg-textarea"></textarea>
+    <label for="mtg-websiteDescription" class="mtg-label">Website Description:</label>
+    <textarea id="mtg-websiteDescription" class="mtg-textarea"></textarea>
 </div>
 
 <div class="mtg-form-group">
-    <label for="mtg-websiteURL" class="mtg-label">Website URL (Canonical):</label>
-    <input type="text" id="mtg-websiteURL" class="mtg-input" placeholder="https://www.example.com">
+    <label for="mtg-websiteURL" class="mtg-label">Website URL (Canonical):</label>
+    <input type="text" id="mtg-websiteURL" class="mtg-input" placeholder="https://www.example.com">
 </div>
 
 <div class="mtg-form-group">
-    <label for="mtg-keywords" class="mtg-label">Keywords (comma-separated):</label>
-    <input type="text" id="mtg-keywords" class="mtg-input">
+    <label for="mtg-keywords" class="mtg-label">Keywords (comma-separated):</label>
+    <input type="text" id="mtg-keywords" class="mtg-input">
 </div>
 
 <div class="mtg-form-group">
-    <label for="mtg-authorName" class="mtg-label">Author Name:</label>
-    <input type="text" id="mtg-authorName" class="mtg-input">
+    <label for="mtg-authorName" class="mtg-label">Author Name:</label>
+    <input type="text" id="mtg-authorName" class="mtg-input">
 </div>
 
 <div class="mtg-form-group">
-    <label for="mtg-faviconURL" class="mtg-label">Favicon URL:</label>
-    <input type="text" id="mtg-faviconURL" class="mtg-input" placeholder="https://www.example.com/favicon.ico">
+    <label for="mtg-faviconURL" class="mtg-label">Favicon URL:</label>
+    <input type="text" id="mtg-faviconURL" class="mtg-input" placeholder="https://www.example.com/favicon.ico">
 </div>
 
 <div class="mtg-form-group">
-    <label for="mtg-languageCode" class="mtg-label">Language Code (e.g., en):</label>
-    <input type="text" id="mtg-languageCode" class="mtg-input" placeholder="en">
+    <label for="mtg-languageCode" class="mtg-label">Language Code (e.g., en):</label>
+    <input type="text" id="mtg-languageCode" class="mtg-input" placeholder="en">
 </div>
 
 <div class="mtg-button-container">
-    <button id="mtg-generateBtn" class="mtg-button mtg-button-primary">Generate Meta Tags</button>
+    <button id="mtg-generateBtn" class="mtg-button mtg-button-primary">Generate Meta Tags</button>
 </div>
 
 <h3>Generated Meta Tags:</h3>
 <textarea id="mtg-output" class="mtg-textarea mtg-output-textarea" readonly></textarea>
 
 <div class="mtg-button-container">
-    <button id="mtg-copyBtn" class="mtg-button mtg-button-secondary">Copy to Clipboard</button>
+    <button id="mtg-copyBtn" class="mtg-button mtg-button-secondary">Copy to Clipboard</button>
 </div>
 
 <div id="mtg-alert" class="mtg-alert" style="display:none;"></div>
 
 <script>
 (function() {
-    const wrapper = document.getElementById('metaTagGeneratorWrapper');
-    if (!wrapper) return;
+    const wrapper = document.getElementById('metaTagGeneratorWrapper');
+    if (!wrapper) return;
 
-    const websiteTitleInput = wrapper.querySelector('#mtg-websiteTitle');
-    const websiteDescriptionInput = wrapper.querySelector('#mtg-websiteDescription');
-    const websiteURLInput = wrapper.querySelector('#mtg-websiteURL');
-    const keywordsInput = wrapper.querySelector('#mtg-keywords');
-    const authorNameInput = wrapper.querySelector('#mtg-authorName');
-    const faviconURLInput = wrapper.querySelector('#mtg-faviconURL');
-    const languageCodeInput = wrapper.querySelector('#mtg-languageCode');
+    const websiteTitleInput = wrapper.querySelector('#mtg-websiteTitle');
+    const websiteDescriptionInput = wrapper.querySelector('#mtg-websiteDescription');
+    const websiteURLInput = wrapper.querySelector('#mtg-websiteURL');
+    const keywordsInput = wrapper.querySelector('#mtg-keywords');
+    const authorNameInput = wrapper.querySelector('#mtg-authorName');
+    const faviconURLInput = wrapper.querySelector('#mtg-faviconURL');
+    const languageCodeInput = wrapper.querySelector('#mtg-languageCode');
 
-    const generateBtn = wrapper.querySelector('#mtg-generateBtn');
-    const outputTextarea = wrapper.querySelector('#mtg-output');
-    const copyBtn = wrapper.querySelector('#mtg-copyBtn');
-    const alertDiv = wrapper.querySelector('#mtg-alert');
+    const generateBtn = wrapper.querySelector('#mtg-generateBtn');
+    const outputTextarea = wrapper.querySelector('#mtg-output');
+    const copyBtn = wrapper.querySelector('#mtg-copyBtn');
+    const alertDiv = wrapper.querySelector('#mtg-alert');
 
-    function escapeHtml(unsafe) {
-        if (typeof unsafe !== 'string') return '';
-        return unsafe.replace(/&/g, "&amp;")
-                     .replace(/</g, "&lt;")
-                     .replace(/>/g, "&gt;")
-                     .replace(/"/g, "&quot;")
-                     .replace(/'/g, "&#039;");
-    }
+    function escapeHtml(unsafe) {
+        if (typeof unsafe !== 'string') return '';
+        return unsafe.replace(/&/g, "&amp;")
+                     .replace(/</g, "&lt;")
+                     .replace(/>/g, "&gt;")
+                     .replace(/"/g, "&quot;")
+                     .replace(/'/g, "&#039;");
+    }
 
-    generateBtn.addEventListener('click', function () {
-        const title = escapeHtml(websiteTitleInput.value.trim());
-        const description = escapeHtml(websiteDescriptionInput.value.trim());
-        const url = escapeHtml(websiteURLInput.value.trim());
-        const keywords = escapeHtml(keywordsInput.value.trim());
-        const author = escapeHtml(authorNameInput.value.trim());
-        const faviconUrl = escapeHtml(faviconURLInput.value.trim());
-        const langCode = escapeHtml(languageCodeInput.value.trim());
+    generateBtn.addEventListener('click', function () {
+        const title = escapeHtml(websiteTitleInput.value.trim());
+        const description = escapeHtml(websiteDescriptionInput.value.trim());
+        const url = escapeHtml(websiteURLInput.value.trim());
+        const keywords = escapeHtml(keywordsInput.value.trim());
+        const author = escapeHtml(authorNameInput.value.trim());
+        const faviconUrl = escapeHtml(faviconURLInput.value.trim());
+        const langCode = escapeHtml(languageCodeInput.value.trim());
 
-        let metaTags = '';
+        let metaTags = '';
 
-        metaTags += '<meta charset="UTF-8" />\n';
-        metaTags += '<meta http-equiv="X-UA-Compatible" content="IE=edge" />\n';
-        metaTags += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n';
+        metaTags += '<meta charset="UTF-8" />\n';
+        metaTags += '<meta http-equiv="X-UA-Compatible" content="IE=edge" />\n';
+        metaTags += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n';
 
-        if (title) metaTags += `<title>${title}</title>\n`;
-        if (description) metaTags += `<meta name="description" content="${description}" />\n`;
-        if (keywords) metaTags += `<meta name="keywords" content="${keywords}" />\n`;
-        if (author) metaTags += `<meta name="author" content="${author}" />\n`;
-        if (langCode) {
-            metaTags += `<!-- For the main HTML tag: <html lang="${langCode}"> -->\n`;
-            metaTags += `<meta http-equiv="Content-Language" content="${langCode}" />\n`;
-        }
-        if (url) metaTags += `<link rel="canonical" href="${url}" />\n`;
-        if (faviconUrl) metaTags += `<link rel="icon" href="${faviconUrl}" type="image/x-icon" />\n`;
+        if (title) metaTags += `<title>${title}</title>\n`;
+        if (description) metaTags += `<meta name="description" content="${description}" />\n`;
+        if (keywords) metaTags += `<meta name="keywords" content="${keywords}" />\n`;
+        if (author) metaTags += `<meta name="author" content="${author}" />\n`;
+        if (langCode) {
+            metaTags += `<!-- For the main HTML tag: <html lang="${langCode}"> -->\n`;
+            metaTags += `<meta http-equiv="Content-Language" content="${langCode}" />\n`;
+        }
+        if (url) metaTags += `<link rel="canonical" href="${url}" />\n`;
+        if (faviconUrl) metaTags += `<link rel="icon" href="${faviconUrl}" type="image/x-icon" />\n`;
 
-        if (title) metaTags += `<meta property="og:title" content="${title}" />\n`;
-        if (description) metaTags += `<meta property="og:description" content="${description}" />\n`;
-        if (url) {
-            metaTags += `<meta property="og:url" content="${url}" />\n`;
-            metaTags += '<meta property="og:type" content="website" />\n';
-        }
-        if (faviconUrl) metaTags += `<meta property="og:image" content="${faviconUrl}" />\n`;
+        if (title) metaTags += `<meta property="og:title" content="${title}" />\n`;
+        if (description) metaTags += `<meta property="og:description" content="${description}" />\n`;
+        if (url) {
+            metaTags += `<meta property="og:url" content="${url}" />\n`;
+            metaTags += '<meta property="og:type" content="website" />\n';
+        }
+        if (faviconUrl) metaTags += `<meta property="og:image" content="${faviconUrl}" />\n`;
 
-        metaTags += `<meta name="twitter:card" content="${faviconUrl ? 'summary_large_image' : 'summary'}" />\n`;
-        if (title) metaTags += `<meta name="twitter:title" content="${title}" />\n`;
-        if (description) metaTags += `<meta name="twitter:description" content="${description}" />\n`;
-        if (faviconUrl) metaTags += `<meta name="twitter:image" content="${faviconUrl}" />\n`;
+        metaTags += `<meta name="twitter:card" content="${faviconUrl ? 'summary_large_image' : 'summary'}" />\n`;
+        if (title) metaTags += `<meta name="twitter:title" content="${title}" />\n`;
+        if (description) metaTags += `<meta name="twitter:description" content="${description}" />\n`;
+        if (faviconUrl) metaTags += `<meta name="twitter:image" content="${faviconUrl}" />\n`;
 
-        outputTextarea.value = metaTags.trim();
-        showAlert('Meta tags generated!', 'success');
-    });
+        outputTextarea.value = metaTags.trim();
+        showAlert('Meta tags generated!', 'success');
+    });
 
-    copyBtn.addEventListener('click', function () {
-        if (outputTextarea.value) {
-            navigator.clipboard.writeText(outputTextarea.value)
-                .then(() => showAlert('Copied to clipboard!', 'success'))
-                .catch(err => showAlert('Failed to copy: ' + err, 'error'));
-        } else {
-            showAlert('Nothing to copy!', 'error');
-        }
-    });
+    copyBtn.addEventListener('click', function () {
+        if (outputTextarea.value) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(outputTextarea.value)
+                    .then(() => showAlert('Copied to clipboard!', 'success'))
+                    .catch(() => fallbackCopyText(outputTextarea.value));
+            } else {
+                fallbackCopyText(outputTextarea.value);
+            }
+        } else {
+            showAlert('Nothing to copy!', 'error');
+        }
+    });
 
-    let alertTimeout;
-    function showAlert(message, type = 'success') {
-        alertDiv.textContent = message;
-        alertDiv.style.display = 'block';
-        alertDiv.style.backgroundColor = type === 'success' ? '#d4edda' : '#f8d7da';
-        alertDiv.style.color = type === 'success' ? '#155724' : '#721c24';
-        alertDiv.style.borderColor = type === 'success' ? '#c3e6cb' : '#f5c6cb';
+    function fallbackCopyText(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';  // avoid scrolling to bottom
+        textarea.style.top = 0;
+        textarea.style.left = 0;
+        textarea.style.width = '1px';
+        textarea.style.height = '1px';
+        textarea.style.padding = 0;
+        textarea.style.border = 'none';
+        textarea.style.outline = 'none';
+        textarea.style.boxShadow = 'none';
+        textarea.style.background = 'transparent';
 
-        clearTimeout(alertTimeout);
-        alertTimeout = setTimeout(() => {
-            alertDiv.style.display = 'none';
-        }, 3000);
-    }
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showAlert('Copied to clipboard!', 'success');
+            } else {
+                showAlert('Failed to copy text.', 'error');
+            }
+        } catch (err) {
+            showAlert('Failed to copy text.', 'error');
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    function showAlert(message, type) {
+        alertDiv.style.display = 'block';
+        alertDiv.textContent = message;
+        if (type === 'success') {
+            alertDiv.style.backgroundColor = '#d4edda';
+            alertDiv.style.color = '#155724';
+            alertDiv.style.borderColor = '#c3e6cb';
+        } else if (type === 'error') {
+            alertDiv.style.backgroundColor = '#f8d7da';
+            alertDiv.style.color = '#721c24';
+            alertDiv.style.borderColor = '#f5c6cb';
+        } else {
+            alertDiv.style.backgroundColor = '#d1ecf1';
+            alertDiv.style.color = '#0c5460';
+            alertDiv.style.borderColor = '#bee5eb';
+        }
+        setTimeout(() => {
+            alertDiv.style.display = 'none';
+        }, 4000);
+    }
 })();
 </script>
 </div>
