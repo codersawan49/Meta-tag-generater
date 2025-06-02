@@ -2,7 +2,7 @@
 
 A clean, fast, and responsive web-based tool to generate SEO-friendly meta tags (HTML `<meta>` tags) for any website or blog. This tool helps developers and content creators easily generate tags for search engines, social media sharing (Open Graph, Twitter Cards), and browser compatibility.
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.jpg)
 
 ---
 
@@ -18,8 +18,8 @@ A clean, fast, and responsive web-based tool to generate SEO-friendly meta tags 
 
 ## 🚀 Live Demo
 
-🔗 [Use the tool here](https://your-live-demo-link.com)  
-_(Replace with your GitHub Pages or Blogger URL)_
+🔗 [Use the tool here](https://seolyticshub.blogspot.com/2025/06/meta-tag-generator-tool-blogger-seo.html)  
+
 
 ---
 
@@ -40,17 +40,6 @@ _(Replace with your GitHub Pages or Blogger URL)_
 
 ---
 
-## 💻 Installation
-
-Clone and run locally:
-
-```bash
-git clone https://github.com/yourusername/meta-tag-generator.git
-cd meta-tag-generator
-open index.html  # or just double-click the file
-```
-
----
 
 ## 📁 Folder Structure
 
@@ -70,5 +59,5 @@ This project is licensed under the **MIT License** – feel free to use, modify,
 
 ## 🙌 Author
 
-Made with 💙 by [Sawan](https://github.com/yourusername)  
+Made with 💙 by [Sawan](https://github.com/codersawan49)  
 Want to improve it? PRs are welcome!
