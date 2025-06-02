@@ -53,7 +53,7 @@ A clean, fast, and responsive web-based tool to generate SEO-friendly meta tags 
 
 ## 📄 License
 
-This project is licensed under the **MIT License** – feel free to use, modify, and distribute it.
+This project is licensed under the **LICENSE** – feel free to use, modify, and distribute it.
 
 ---
 
